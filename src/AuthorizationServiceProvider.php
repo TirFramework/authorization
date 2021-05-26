@@ -5,7 +5,7 @@ namespace Tir\Acl;
 use Tir\Acl\EventServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
-class AclServiceProvider extends ServiceProvider
+class AuthorizationServiceProvider extends ServiceProvider
 {
 
 
@@ -16,7 +16,6 @@ class AclServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(EventServiceProvider::class);
 
     }
 
