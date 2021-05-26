@@ -1,6 +1,6 @@
 {
-    "name": "tir/acl",
-    "description": "The ACL package control access level in Tir framework",
+    "name": "tir/authorization",
+    "description": "The authorization package control access level in Tir framework",
     "license": "MIT",
     "authors": [
         {
@@ -22,7 +22,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Tir\\Acl\\AclServiceProvider"
+                "AuthorizationServiceProvider"
             ]
         }
     }
