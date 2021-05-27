@@ -1,14 +1,14 @@
 <?php
 
-namespace Tir\Acl;
+namespace Tir\Authorization;
 
-use Tir\Acl\EventServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Tir\Authorization\Entities\Role;
+use Tir\Authorization\Providers\SeedServiceProvider;
+use Tir\User\Entities\User;
 
 class AuthorizationServiceProvider extends ServiceProvider
 {
-
-
     /**
      * Register any application services.
      *
@@ -26,6 +26,24 @@ class AuthorizationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->loadRoutesFrom(__DIR__.'/Routes/admin.php');
+
+        $this->loadMigrationsFrom(__DIR__ .'/Database/Migrations');
+
+        $this->loadViewsFrom(__DIR__.'/Resources/Views', 'authorization');
+
+        $this->loadTranslationsFrom(__DIR__.'/Resources/Lang/', 'authorization');
+
+        $this->app->register(SeedServiceProvider::class);
+
+        $this->addDynamicRelations();
     }
+
+
+     private function addDynamicRelations()
+     {
+         User::addDynamicRelation('roles', function (User $user) {
+             return $user->belongsToMany(Role::class);
+         });
+     }
 }
