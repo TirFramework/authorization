@@ -1,14 +1,14 @@
 <?php
 
-namespace Tir\Blog\Entities;
+namespace Tir\Role\Requests;
 
+use Tir\Authorization\Entities\Role;
 use Tir\Crud\Support\Scaffold\BaseScaffold;
-use Tir\Crud\Support\Scaffold\Fields\OneToMany;
-use Tir\Crud\Support\Scaffold\Fields\Select;
+use Tir\Crud\Support\Scaffold\Fields\Custom;
 use Tir\Crud\Support\Scaffold\Fields\Text;
-use Tir\User\Entities\User;
 
-Class RoleScaffold extends BaseScaffold
+
+class RoleScaffold extends BaseScaffold
 {
 
     public bool $localization = false;
@@ -16,15 +16,16 @@ Class RoleScaffold extends BaseScaffold
     protected function setFields(): array
     {
         return [
-            Text::make('title'),
-            OneToMany::make('user_id')->relation('user','name')
+            Text::make('name'),
+            Text::make('slug'),
+            Custom::make('permissions')
         ];
 
     }
 
     protected function setName(): string
     {
-        return 'postCategory';
+        return 'role';
     }
 
 

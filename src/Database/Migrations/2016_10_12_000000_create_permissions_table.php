@@ -19,7 +19,7 @@ class CreatePermissionsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('role_id')->unsigned();
-            $table->string('model');
+            $table->string('module');
             $table->string('action');
             $table->string('access');
             $table->timestamps();

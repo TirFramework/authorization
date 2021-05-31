@@ -12,13 +12,14 @@
 */
 
 // Add web middleware for use Laravel feature
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware' => 'web'], function () {
 
     //Add admin prefix and middleware for admin area to user module
-    Route::group(['prefix' => 'admin', 'middleware' => 'IsAdmin'], function () {
-        Route::resource('/user', 'Tir\User\Controllers\AdminUserController');
-    });
-    
-    Route::get('admin/login', 'Tir\User\Controllers\Auth\LoginController@showAdminLoginForm')->name('admin.login');
+//    Route::group(['prefix' => 'admin', 'middleware' => 'IsAdmin'], function () {
+//        Route::resource('/role', AdminRoleController);
+//    });
+//
 });
 
