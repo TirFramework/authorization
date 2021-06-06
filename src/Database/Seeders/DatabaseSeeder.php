@@ -32,30 +32,27 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('permissions')->insert([
-            'id' => '1',
-            'user_id' => '1',
+            'id'      => '1',
             'role_id' => '1',
-            'model' => 'user',
-            'action' => 'index',
-            'access' => 'allow',
+            'module'  => 'user',
+            'action'  => 'index',
+            'access'  => 'allow',
         ]);
 
         DB::table('permissions')->insert([
-            'id' => '2',
-            'user_id' => '1',
+            'id'      => '2',
             'role_id' => '2',
-            'model' => 'user',
-            'action' => 'index',
-            'access' => 'deny',
+            'module'  => 'user',
+            'action'  => 'index',
+            'access'  => 'deny',
         ]);
 
         DB::table('permissions')->insert([
-            'id' => '3',
-            'user_id' => '1',
+            'id'      => '3',
             'role_id' => '1',
-            'model' => 'user',
-            'action' => 'edit',
-            'access' => 'allow',
+            'module'  => 'user',
+            'action'  => 'edit',
+            'access'  => 'allow',
         ]);
 
 

@@ -16,8 +16,7 @@ class Access
     public static function check(string $module, string $action): string
     {
         $roles = Auth::user()->roles()->with('permissions')->get();
-
-        $access = 'allow';
+        $access = 'owner';
         foreach ($roles as $role) {
             $permission = $role->permissions->where('module', $module)->where('action', $action)->first();
             if (isset($permission->access)) {

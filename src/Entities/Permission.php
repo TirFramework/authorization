@@ -2,14 +2,23 @@
 
 namespace Tir\Authorization\Entities;
 
-use Tir\Authorization\access;
-use Tir\Crud\Support\Eloquent\CrudModel;
-use Tir\User\Entities\User;
+use Illuminate\Database\Eloquent\Model;
+use Tir\Crud\Support\Scaffold\BaseScaffold;
 
-class Permission extends CrudModel
+class Permission extends Model
 {
+    use BaseScaffold;
 
-    protected $fillable = ['id', 'model', 'action', 'access'];
+    protected $fillable = ['id', 'role_id', 'user_id', 'model', 'action', 'access'];
 
 
+    protected function setModuleName(): string
+    {
+        return 'permission';
+    }
+
+    protected function setFields(): array
+    {
+        return [];
+    }
 }
