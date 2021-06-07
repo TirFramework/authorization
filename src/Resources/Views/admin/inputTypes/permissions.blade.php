@@ -15,7 +15,7 @@
         <table class="table">
             {{--for update empty check box--}}
             {!! Form::hidden("permissions","")!!}
-            @foreach(Modules::list() as $module)
+            @foreach(Tir\Crud\Support\Module\Modules::list() as $module)
                 @include('authorization::admin.inputTypes.modulePermission',compact('module','model'))
             @endforeach
         </table>
