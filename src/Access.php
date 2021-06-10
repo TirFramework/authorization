@@ -17,8 +17,12 @@ class Access
     public static function check(string $module, string $action): string
     {
         $rolesId = Auth::user()->roles()->get()->pluck('id');
+        $action = static::actionChecker($action);
+
         $permissions = Permission::whereIn('role_id', $rolesId)->where('module', $module)->where('action', $action)->get();
-        $access = '';
+
+        $access = 'deny';
+
         foreach ($permissions as $permission) {
             if (isset($permission->access)) {
                 if ($permission->access == 'allow') {
@@ -42,5 +46,28 @@ class Access
             abort('403');
         }
         return $access;
+    }
+
+    private static function actionChecker($action)
+    {
+        if ($action == 'data' || $action == 'select') {
+            $action = 'index';
+        }
+
+        if ($action == 'update') {
+            $action = 'edit';
+        }
+
+        if ($action == 'store') {
+            $action = 'create';
+        }
+
+        if ($action == 'restore') {
+            $action = 'destroy';
+        }
+
+
+        return $action;
+
     }
 }

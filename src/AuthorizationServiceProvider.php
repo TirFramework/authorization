@@ -62,7 +62,7 @@ class AuthorizationServiceProvider extends ServiceProvider
     private function registerModule()
     {
         $authorization = new Module();
-        $authorization->setName('authorization');
+        $authorization->setName('role');
         $authorization->enable();
         Modules::register($authorization);
     }
