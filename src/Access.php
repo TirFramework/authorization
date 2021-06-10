@@ -3,6 +3,7 @@
 namespace Tir\Authorization;
 
 use Illuminate\Support\Facades\Auth;
+use Tir\Authorization\Entities\Permission;
 
 class Access
 {
@@ -15,10 +16,10 @@ class Access
      */
     public static function check(string $module, string $action): string
     {
-        $roles = Auth::user()->roles()->with('permissions')->get();
-        $access = 'owner';
-        foreach ($roles as $role) {
-            $permission = $role->permissions->where('module', $module)->where('action', $action)->first();
+        $rolesId = Auth::user()->roles()->get()->pluck('id');
+        $permissions = Permission::whereIn('role_id', $rolesId)->where('module', $module)->where('action', $action)->get();
+        $access = '';
+        foreach ($permissions as $permission) {
             if (isset($permission->access)) {
                 if ($permission->access == 'allow') {
                     $access = 'allow';
