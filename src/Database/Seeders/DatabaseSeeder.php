@@ -32,7 +32,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('permissions')->insert([
-            'id'      => '1',
             'role_id' => '1',
             'module'  => 'user',
             'action'  => 'index',
@@ -40,7 +39,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('permissions')->insert([
-            'id'      => '2',
             'role_id' => '2',
             'module'  => 'user',
             'action'  => 'index',
@@ -48,22 +46,42 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('permissions')->insert([
-            'id'      => '3',
             'role_id' => '1',
             'module'  => 'user',
             'action'  => 'edit',
             'access'  => 'allow',
         ]);
 
+        DB::table('permissions')->insert([
+            'role_id' => '1',
+            'module'  => 'role',
+            'action'  => 'index',
+            'access'  => 'allow',
+        ]);
+
+        DB::table('permissions')->insert([
+            'role_id' => '1',
+            'module'  => 'role',
+            'action'  => 'create',
+            'access'  => 'allow',
+        ]);
+
+        DB::table('permissions')->insert([
+            'role_id' => '1',
+            'module'  => 'role',
+            'action'  => 'edit',
+            'access'  => 'allow',
+        ]);
+
 
         DB::table('role_user')->insert([
-            'id' => '1',
+            'id'      => '1',
             'user_id' => '1',
             'role_id' => '1',
         ]);
 
         DB::table('role_user')->insert([
-            'id' => '2',
+            'id'      => '2',
             'user_id' => '1',
             'role_id' => '2',
         ]);

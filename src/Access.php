@@ -18,9 +18,7 @@ class Access
     {
         $rolesId = Auth::user()->roles()->get()->pluck('id');
         $action = static::actionChecker($action);
-
         $permissions = Permission::whereIn('role_id', $rolesId)->where('module', $module)->where('action', $action)->get();
-
         $access = 'deny';
 
         foreach ($permissions as $permission) {
@@ -35,7 +33,6 @@ class Access
                 }
             }
         }
-
         return $access;
     }
 
