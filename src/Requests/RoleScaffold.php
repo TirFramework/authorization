@@ -13,8 +13,8 @@ trait RoleScaffold
     protected function setFields(): array
     {
         return [
-            Text::make('name'),
-            Text::make('slug'),
+            Text::make('name')->rules('required'),
+            Text::make('slug')->rules('required'),
             Custom::make('permissions')->type('permissions')->hideFromIndex()
         ];
 

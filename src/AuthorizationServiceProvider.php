@@ -3,6 +3,7 @@
 namespace Tir\Authorization;
 
 use Illuminate\Support\ServiceProvider;
+use Tir\Authorization\Database\Seeders\DatabaseSeeder;
 use Tir\Authorization\Entities\Role;
 use Tir\Authorization\Middleware\AclMiddleware;
 use Tir\Authorization\Providers\SeedServiceProvider;
@@ -40,6 +41,7 @@ class AuthorizationServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/Resources/Lang/', 'authorization');
 
         $this->app->register(SeedServiceProvider::class);
+
         $this->app['router']->aliasMiddleware('acl', AclMiddleware::class);
 
 
@@ -62,8 +64,8 @@ class AuthorizationServiceProvider extends ServiceProvider
     private function registerModule()
     {
         $authorization = new Module();
-        $authorization->setName('role');
-        $authorization->enable();
+        $authorization->setName('role')->enable();
+
         Modules::register($authorization);
     }
 

@@ -3,18 +3,21 @@
 namespace Tir\Authorization\Controllers;
 
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 use Tir\Authorization\Entities\Permission;
 use Tir\Authorization\Entities\Role;
 use Tir\Crud\Controllers\CrudController;
 
 class AdminRoleController extends CrudController
 {
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-        return DB::transaction(function () use ($request) { // Start the transaction
+
+        DB::transaction(function () use ($request) { // Start the transaction
             $data = $request->all();
             $userId = Auth::id();
             $preparedData = [];
@@ -33,6 +36,9 @@ class AdminRoleController extends CrudController
             }
             Permission::insert($preparedData);
         });
+
+        return $this->storeReturn($request);
+
     }
 
     public function updateCrud(Request $request, $id, $item)
