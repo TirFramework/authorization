@@ -16,7 +16,7 @@ class CreateRolesTable extends Migration
         Schema::disableForeignKeyConstraints();
 
         Schema::create('roles', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id('id');
             $table->string('name');
             $table->string('slug')->unique();
             $table->enum('status', ['disabled', 'enabled'])->default('enabled');
@@ -25,13 +25,13 @@ class CreateRolesTable extends Migration
         });
 
         Schema::create('role_user', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('role_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+            $table->id('id');
+            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('user_id');
 
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('CASCADE');
 
         });
 

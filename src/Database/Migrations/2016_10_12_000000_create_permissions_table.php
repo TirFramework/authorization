@@ -16,8 +16,8 @@ class CreatePermissionsTable extends Migration
         Schema::disableForeignKeyConstraints();
 
         Schema::create('permissions', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('role_id')->unsigned();
+            $table->id('id');
+            $table->unsignedBigInteger('role_id');
             $table->string('module');
             $table->string('action');
             $table->string('access');
