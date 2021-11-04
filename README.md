@@ -1,3 +1,3 @@
-# acl
+# authorization
 
-The ACL package control access level in Tir framework
+The authorization package control access level in Tir framework
