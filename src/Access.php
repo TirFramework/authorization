@@ -14,9 +14,10 @@ class Access
      * @param string $action
      * @return string
      */
-    public static function check(string $module, string $action): string
+    public static function check(string $module, string $action)
     {
         $rolesId = Auth::user()->roles()->get()->pluck('id');
+
         $action = static::actionChecker($action);
         $permissions = Permission::whereIn('role_id', $rolesId)->where('module', $module)->where('action', $action)->get();
         $access = 'deny';
@@ -40,7 +41,7 @@ class Access
     {
         $access = Access::check($module, $action);
         if ($access == 'deny') {
-            abort('403');
+            abort(403, 'You have no access to this area');
         }
         return $access;
     }

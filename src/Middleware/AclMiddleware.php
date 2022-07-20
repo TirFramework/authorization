@@ -21,6 +21,7 @@ class AclMiddleware
         $module = (explode('.', Route::currentRouteName()));
         $action = explode('@', Route::currentRouteAction());
         Access::execute($module[1], $action[1]);
+
         return $next($request);
     }
 }

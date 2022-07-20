@@ -15,7 +15,7 @@ trait RoleScaffold
         return [
             Text::make('name')->rules('required'),
             Text::make('slug')->rules('required'),
-            Custom::make('permissions')->type('permissions')->hideFromIndex()
+//            Custom::make('permissions')->type('permissions')->hideFromIndex()
         ];
 
     }
