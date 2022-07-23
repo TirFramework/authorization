@@ -10,7 +10,7 @@ class Permission extends Select {
 
     protected function setValue($model)
     {
-        $filedName = explode(',', $this->name);
+        $filedName = explode('.', $this->name);
 
         foreach($model->{$filedName[0]} as $permission){
             if($permission['module'] == $filedName[1] && $permission['action'] == $filedName[2]){
