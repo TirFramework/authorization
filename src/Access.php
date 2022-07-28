@@ -7,6 +7,20 @@ use Tir\Authorization\Entities\Permission;
 
 class Access
 {
+
+    private static Access $obj;
+    private static $permissions;
+    public static function init(): Access
+    {
+        if (!isset(self::$obj)) {
+            self::$obj = new Access();
+            $rolesId = Auth::user()->roles()->get()->pluck('id');
+            self::$permissions = Permission::whereIn('role_id', $rolesId)->get();
+
+        }
+        return self::$obj;
+    }
+
     /**
      * Check permissions to access the module
      *
@@ -16,12 +30,10 @@ class Access
      */
     public static function check(string $module, string $action)
     {
-        $rolesId = Auth::user()->roles()->get()->pluck('id');
-
+        static::init();
         $action = static::actionChecker($action);
-        $permissions = Permission::whereIn('role_id', $rolesId)->where('module', $module)->where('action', $action)->get();
         $access = 'deny';
-
+        $permissions = self::$permissions->where('module', $module)->where('action', $action);
         foreach ($permissions as $permission) {
             if (isset($permission->access)) {
                 if ($permission->access == 'allow') {
