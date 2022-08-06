@@ -19,8 +19,7 @@ class AclMiddleware
     public function handle($request, Closure $next)
     {
         $module = (explode('.', Route::currentRouteName()));
-        $action = explode('@', Route::currentRouteAction());
-        Access::execute($module[1], $action[1]);
+        Access::execute($module[1], $module[2]);
 
         return $next($request);
     }
