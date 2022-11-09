@@ -20,6 +20,7 @@ class AuthorizationServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->loadRoutesFrom(__DIR__ . '/Routes/admin.php');
 
     }
 
@@ -30,12 +31,11 @@ class AuthorizationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__ . '/Routes/admin.php');
 
         $this->loadMigrationsFrom(__DIR__ . '/Database/Migrations');
 
-        $this->loadViewsFrom(__DIR__ . '/Resources/Views', 'authorization');
-        $this->loadViewsFrom(__DIR__ . '/Resources/Views', 'role');
+//        $this->loadViewsFrom(__DIR__ . '/Resources/Views', 'authorization');
+//        $this->loadViewsFrom(__DIR__ . '/Resources/Views', 'role');
 
 
         $this->loadTranslationsFrom(__DIR__ . '/Resources/Lang/', 'authorization');
@@ -49,7 +49,7 @@ class AuthorizationServiceProvider extends ServiceProvider
 
         $this->registerModule();
 
-        $this->adminMenu();
+//        $this->adminMenu();
     }
 
 
@@ -74,6 +74,6 @@ class AuthorizationServiceProvider extends ServiceProvider
         $menu = resolve('AdminMenu')->weight(10);
         $menu->item('system')->title('authorization::panel.system')->link('#')->add();
         $menu->item('system.users')->title('authorization::panel.users')->link('#')->add();
-        $menu->item('system.users.roles')->title('authorization::panel.roles')->route('admin.role.index')->add();
+        $menu->item('system.users.roles')->title('authorization::panel.roles')->link('service.details')->add();
     }
 }
