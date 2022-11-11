@@ -31,7 +31,7 @@ class Access
     public static function check(string $module, string $action)
     {
         static::init();
-        $action = static::actionChecker($action);
+        $action = static::getCrudAction($action);
         $access = 'deny';
         $permissions = static::$permissions->where('module', $module)->where('action', $action);
         foreach ($permissions as $permission) {
@@ -58,26 +58,13 @@ class Access
         return $access;
     }
 
-    private static function actionChecker($action)
+    private static function getCrudAction(string $action): string
     {
-        if ($action == 'data' || $action == 'select') {
-            $action = 'index';
+        $baseActions = ['data'=>'index', 'select'=>'index', 'store'=>'create', 'update'=>'edit', 'restore'=>'destroy'];
+        if(isset($baseActions[$action])){
+            return $baseActions[$action];
         }
-
-        if ($action == 'update') {
-            $action = 'edit';
-        }
-
-        if ($action == 'store') {
-            $action = 'create';
-        }
-
-        if ($action == 'restore') {
-            $action = 'destroy';
-        }
-
-
         return $action;
-
     }
+
 }

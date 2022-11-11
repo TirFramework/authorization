@@ -21,18 +21,21 @@ class AclMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $moduleName = $request->input('crudModuleName');
-        $actionName = $request->input('crudActionName');
-        $modelName = $request->input('crudModelName');
+        if (config('auth.accessLevelControl') != 'off'){
+            $moduleName = $request->input('crudModuleName');
+            $actionName = $request->input('crudActionName');
+            $modelName = $request->input('crudModelName');
 
-        $modelName::addGlobalScope('accessLevel', function (Builder $builder)use($moduleName, $actionName) {
-            $access = Access::check($moduleName, $actionName);
-            if ($access == 'owner') {
-                return $builder->where('user_id', '=', Auth::id());
-            }elseif ($access != 'allow') {
-                abort(403, 'you don\'t have access to this area');
-            }
-        });
+            $modelName::addGlobalScope('accessLevel', function (Builder $builder) use ($moduleName, $actionName) {
+                $access = Access::check($moduleName, $actionName);
+                if ($access == 'owner') {
+                    return $builder->where('user_id', '=', Auth::id());
+                } elseif ($access != 'allow') {
+                    abort(403, 'you don\'t have access to this area');
+                }
+            });
+        }
+
         return $next($request);
     }
 }
