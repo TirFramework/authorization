@@ -20,7 +20,6 @@ class AuthorizationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->loadRoutesFrom(__DIR__ . '/Routes/admin.php');
 
     }
 
@@ -33,6 +32,7 @@ class AuthorizationServiceProvider extends ServiceProvider
     {
 
         $this->loadMigrationsFrom(__DIR__ . '/Database/Migrations');
+        $this->loadRoutesFrom(__DIR__ . '/Routes/admin.php');
 
 //        $this->loadViewsFrom(__DIR__ . '/Resources/Views', 'authorization');
 //        $this->loadViewsFrom(__DIR__ . '/Resources/Views', 'role');
@@ -45,7 +45,7 @@ class AuthorizationServiceProvider extends ServiceProvider
         $this->app['router']->aliasMiddleware('acl', AclMiddleware::class);
 
 
-        $this->addDynamicRelations();
+//        $this->addDynamicRelations();
 
         $this->registerModule();
 

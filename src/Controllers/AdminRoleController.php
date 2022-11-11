@@ -51,7 +51,7 @@ class AdminRoleController extends CrudController
 
     public function update(Request $request, int $id): JsonResponse
     {
-        $item = $this->model->accessLevel()->findOrFail($id);
+        $item = $this->model()->findOrFail($id);
         $item->scaffold();
 
         $item = DB::transaction(function () use ($request, $item) { // Start the transaction
@@ -79,7 +79,7 @@ class AdminRoleController extends CrudController
                 return $item;
         });
 
-        $moduleName = $this->model->getModuleName();
+        $moduleName = $this->model()->getModuleName();
         $message = trans('core::message.item-updated', ['item' => trans("message.item.$moduleName")]); //translate message
 
         return $this->updateResponse($item);

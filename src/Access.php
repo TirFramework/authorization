@@ -14,8 +14,8 @@ class Access
     {
         if (!isset(self::$obj)) {
             self::$obj = new Access();
-            $rolesId = Auth::user()->roles()->get()->pluck('id');
-            self::$permissions = Permission::whereIn('role_id', $rolesId)->get();
+            $rolesId = Auth::user()->roles()->withoutGlobalScope('accessLevel')->get()->pluck('id');
+            static::$permissions = Permission::whereIn('role_id', $rolesId)->get();
 
         }
         return self::$obj;
@@ -33,7 +33,7 @@ class Access
         static::init();
         $action = static::actionChecker($action);
         $access = 'deny';
-        $permissions = self::$permissions->where('module', $module)->where('action', $action);
+        $permissions = static::$permissions->where('module', $module)->where('action', $action);
         foreach ($permissions as $permission) {
             if (isset($permission->access)) {
                 if ($permission->access == 'allow') {
