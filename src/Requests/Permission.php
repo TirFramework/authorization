@@ -6,7 +6,7 @@ use Tir\Crud\Support\Scaffold\Fields\Select;
 
 class Permission extends Select {
 
-    protected string $type = 'radio';
+    protected string $type = 'Radio';
 
     protected function setValue($model)
     {
