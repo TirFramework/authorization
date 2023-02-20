@@ -46,7 +46,7 @@ trait RoleScaffold
             array_push($this->fields, Blank::make('sperator')->value('<h2 class="bg-gray-100 text-center p-4 mb-3 rounded-md text-xl uppercase">' . $module['name'] . '</h2>')->hideFromIndex());
             foreach ($module['permissions'] as $permission){
                 $name ="permissions." .$module['name'].".".$permission['page']['value'];
-                array_push($this->fields, Permission::make($name)->data($permission['access'])->display($permission['page']['value'])->hideFromIndex());
+                array_push($this->fields, Permission::make($name)->data(...$permission['access'])->display($permission['page']['value'])->hideFromIndex());
             }
         }
     }

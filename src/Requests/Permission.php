@@ -8,7 +8,7 @@ class Permission extends Select {
 
     protected string $type = 'Radio';
 
-    protected function setValue($model)
+    protected function setValue($model): void
     {
         $filedName = explode('.', $this->name);
 

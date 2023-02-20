@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Response;
 use Tir\Authorization\Entities\Permission;
 use Tir\Authorization\Entities\Role;
 use Tir\Crud\Controllers\CrudController;
+use Tir\Crud\Support\Requests\CrudRequest;
 
 class AdminRoleController extends CrudController
 {
@@ -21,7 +22,7 @@ class AdminRoleController extends CrudController
     }
 
 
-    public function store(Request $request): JsonResponse
+    public function store(CrudRequest $request): JsonResponse
     {
         $role = DB::transaction(function () use ($request) { // Start the transaction
                 $data = $request->all();
@@ -49,7 +50,7 @@ class AdminRoleController extends CrudController
     }
 
 
-    public function update(Request $request, int $id): JsonResponse
+    public function update(CrudRequest $request, int|string $id): JsonResponse
     {
         $item = $this->model()->findOrFail($id);
         $item->scaffold();
