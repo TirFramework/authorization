@@ -82,7 +82,7 @@ class AdminRoleController extends CrudController
         $moduleName = $this->model()->getModuleName();
         $message = trans('core::message.item-updated', ['item' => trans("message.item.$moduleName")]); //translate message
 
-        $this->updateRelations($request, $item);
+        return $this->response()->update($item, $this->model());
 
     }
 
